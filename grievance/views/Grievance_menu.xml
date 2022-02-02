@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="grivance_register_action" model="ir.actions.act_window">
+        <field name="name">Grievances</field>
+        <field name="res_model">grievance.register</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+    
+
+ <menuitem id="grievance_register_root" name="Grievance and Support">
+     <menuitem id="menu_grievances_register" name="Grievances">
+         <menuitem id="menu_grievance_register_action" action="grivance_register_action"/>
+         
+     </menuitem>
+     
+     
+         
+     
+ </menuitem>
+</odoo>

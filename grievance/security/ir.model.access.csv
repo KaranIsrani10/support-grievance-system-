@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_grievance_register,access_grievance_register,grievance.model_grievance_register,base.group_user,1,1,1,1
+access_department_register,access_department_register,grievance.model_department_register,base.group_user,1,1,1,1
