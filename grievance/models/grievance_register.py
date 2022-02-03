@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 
-
+# initial db 
 class grievance_Register(models.Model):
     _name = 'grievance.register'
     _description = 'grievance registration'
