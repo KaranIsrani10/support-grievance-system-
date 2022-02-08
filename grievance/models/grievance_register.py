@@ -7,9 +7,11 @@ class grievance_Register(models.Model):
     _name = 'grievance.register'
     _description = 'grievance registration'
 
-    name = fields.Char()
-    subject = fields.Char()
+    name = fields.Char(string="Subject")
     description = fields.Text()
+    
+    grievance_type_id = fields.Many2one('grievance.type')
     department_id = fields.Many2one('department.register')
+
 
     
