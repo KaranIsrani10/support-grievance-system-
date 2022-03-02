@@ -9,7 +9,7 @@ class grievance_Register(models.Model):
 
     name = fields.Char(string="Subject")
     description = fields.Text()
-    
+    supporters_ids = fields.Many2many('res.partner')
     grievance_type_id = fields.Many2one('grievance.type')
     department_id = fields.Many2one('department.register')
 

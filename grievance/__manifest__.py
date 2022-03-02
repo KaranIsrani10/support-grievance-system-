@@ -14,10 +14,16 @@
         this module is used to provides support and register their grievances
     """,
     'application': True,
+    'depends':[
+        'website'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/Grievance_menu.xml',
         'views/Grievance_views.xml',
+        'views/web_template.xml',
+        'data/grievance_web_menu.xml',
+        
     ]
     
 }

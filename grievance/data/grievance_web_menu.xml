@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="grievance_web_menu" model="website.menu">
+            <field name="name">Register Grievance</field>
+            <field name="url">/grievance</field>
+            <field name="parent_id" ref="website.main_menu"></field>
+        </record>
+    
+    </data>
+    
+    
+
+</odoo>

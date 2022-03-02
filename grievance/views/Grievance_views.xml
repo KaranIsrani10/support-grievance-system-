@@ -27,6 +27,9 @@
                 <field name="description" />
               </group>
               <group>
+                <field name="supporters_ids" widget="many2many_tags" />
+              </group>
+              <group>
                 <field name="grievance_type_id" />
                 <field name="department_id" />
               </group>
@@ -92,6 +95,7 @@
               <page string="Grivances">
                 <field name="grievance_type_ids" />
               </page>
+              
             </notebook>
           </sheet>
         </form>
