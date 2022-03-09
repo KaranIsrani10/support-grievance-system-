@@ -15,13 +15,8 @@
                         <textarea class="form-control" name="Description" id="description" placeholder="Description" />
                     </div>
                     <div class="form-group">
-                        <label for="grievance_type">Supporters</label>
-                        <select name="Supporter" id="Supporter_id" class="form-control" aria-label="Default select example" readonly='true'>
-                            <t t-foreach="grievances_supporter" t-as="grivance">
-                                <option t-out="grivance.name"/>
-                            </t>    
-                        </select>
-                        
+                        <label for="grievance_type">Supporter</label>
+                        <input type="text" t-att-value="grievances_supporter.name" class="form-control" name="Supporter" id="Supporter_id" placeholder="Supporter"/>
                     </div>
                     <div class="form-group">
                         <label for="grievance_type">Grievance Type</label>
