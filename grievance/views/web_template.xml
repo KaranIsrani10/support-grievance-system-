@@ -1,60 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    
     <template id="create_grievance_form_template" name="Grievance Create">
         <t t-call="website.layout">
-            <div class="container">
-                <h3 class="text-center">Create Grievance</h3>
-                <form class="mt-5" action="/create/grievance-registered" method="post">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" class="form-control" name="Subject" id="subject" placeholder="Subject"/>
+            <!-- <div class="container"> -->
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3 class="text-center">Open Grievances</h3>
+                        <table class="table table-hover mt-5">
+                            <thead>
+                                <th>No.</th>
+                                <th>Subject</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>State</th>
+                                <th>Department</th>
+                                <!-- <th>Supporters</th> -->
+                            </thead>
+                            <tbody>
+                                <t t-set="sequence" t-value="0"/>
+                                <t t-foreach="grievances" t-as="Grievance">
+                                    <tr>
+                                        <t t-set="sequence" t-value="sequence + 1"/>
+                                            <td><t t-out="sequence" /></td>
+                                            <td>
+                                                <a t-attf-href="/supporters_list/#{Grievance.id}">
+                                                    <t t-out="Grievance.name" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <t t-out="Grievance.grievance_type_id.name" />
+                                            </td>
+                                            <td>
+                                                <t t-out="Grievance.description" />
+                                            </td>
+                                            <td><span t-field="Grievance.state"/></td>
+                                            <td>
+                                                <t t-out="Grievance.department_id.name" />
+                                            </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        
                     </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="Description" id="description" placeholder="Description" />
+                    <div class="col-md-3 bg-light">
+                        <h3 class="text-center mt-4">Create Grievances</h3>
+                        <form class="mt-4" action="/create/grievance-registered" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" t-att-value="name" class="form-control" name="name" id="subject" placeholder="Subject"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" t-att-value="description" name="description" id="description" placeholder="Description" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Supporter_id">Supporter</label>
+                                <select name="supporters_ids" class="form-control" aria-label="Default select example" disabled="disabled">
+                                    <t t-foreach="grievances_supporter" t-as="supporter">
+                                        <option t-att-value="supporter.id" t-out="supporter.name"/>
+                                    </t>    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="grievance_type">Grievance Type</label>
+                                <select name="grievance_type_id" class="form-control" aria-label="Default select example">
+                                    <t t-foreach="grievance_type" t-as="type">
+                                        <option t-att-value="type.id" t-out="type.name"/>
+                                    </t>    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <select name="department_id" class="form-control" aria-label="Default select example">
+                                    <t t-foreach="grievance_department" t-as="department">
+                                        <option t-att-value="department.id" t-out="department.name"/>
+                                    </t>    
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload Image</label>
+                                <input class="form-control" type="file" name="image" id="formFile" accept="image/png, image/jpg, image/jpeg" required="1"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-5">Create Grievance</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="grievance_type">Supporter</label>
-                        <input type="text" t-att-value="grievances_supporter.name" class="form-control" name="Supporter" id="Supporter_id" placeholder="Supporter"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="grievance_type">Grievance Type</label>
-                        <select name="GrivanceType" class="form-control" aria-label="Default select example">
-                            <t t-foreach="grievance_type" t-as="type">
-                                <option t-out="type.name"/>
-                            </t>    
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Department</label>
-                         <select name="Department" class="form-control" aria-label="Default select example">
-                            <t t-foreach="grievance_department" t-as="department">
-                                <option t-out="department.name"/>
-                            </t>    
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-5">Create Grievance</button>
-                </form>
-            </div>
+                </div>
+            <!-- </div> -->
         </t>
     </template>
    
     <record id="successfully_register" model="website.page">
-        <field name="name">Thanks</field>
+        <field name="name">success</field>
         <field name="type">qweb</field>
         <field name="url">/grievance-thank-you</field>
         <field name="website_published">True</field>
         <field name="key">grievance.successfully_register</field>
         <field name="arch" type="xml">
-            <t name="Thanks" t-name="grievance.successfully_register">
+            <t name="success" t-name="grievance.successfully_register">
                 <t t-call="website.layout">
                     <div class="container">
                         <h1>Thanks!</h1>
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="alert alert-success" role="status">
-                                    Your Grievance Register Successfully Registered...
+                                    Your Grievance Successfully Registered...
                                 </div>
                             </div>
                         </div>
@@ -63,5 +115,47 @@
             </t>
         </field>
     </record>
+    <template id="supporters_details" name="supporters_details">
+        <div t-call="website.layout">
+            <div class="text-center mt-4 mb-4">Supporters</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <t t-foreach="grievance" t-as="Grievance">
+                            <thead>
+                                <th>Subject</th>
+                                <th>Image</th>
+                                <th>Supporters</th>
+                                <th><a class="btn btn-primary" t-attf-href="/add_supporter/#{Grievance.id}">Support This</a></th>
+                            </thead>
+                            <tbody>
+                                
+                                    <tr>
+                                        <td>
+                                            <t t-out="Grievance.name"/>
+                                        </td>
+                                        <td>
+                                            <div t-attf-style="padding-top: 50%; background-image: url(/web/image/grievance.register/#{Grievance.id}/image); background-size: cover; background-position:center"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="grievance.supporters_ids.name"/>
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                        
+                                    </tr> 
+                                
+                            </tbody>
+                        </t> 
+                    </table>
+                </div>
+            </div>     
+        </div>        
+    </template>
+
+
+    
+    
 </odoo>
 

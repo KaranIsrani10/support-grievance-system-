@@ -18,22 +18,40 @@
       <field name="model">grievance.register</field>
       <field name="arch" type="xml">
         <form string="">
+
+          <header>
+            <button string="In Progress" states="inprogress" class="oe_highlight" name="action_inprogress" type="object" attrs="{'invisible': ['|',('state', '=', 'cancel'),('state', '=', 'solved')]}"/>
+            <button string="Solved" states="solved" class="oe_highlight" name="action_solved" type="object" attrs="{'invisible': [('state', '=', 'cancel')]}"/>
+            <button string="Cancelled" states="cancel" class="oe_highlight" name="action_cancel" type="object" attrs="{'invisible': [('state', '=', 'solved')]}"/>
+            <field name="state" widget="statusbar" statusbar_visible="new,inprogress,solved,cancel"/>
+          </header>
+
           <sheet>
             <div class="h1">
-                <field name="name" />
+              <field name="name" />
             </div>
             <group>
-              <group>
-                <field name="description" />
-              </group>
-              <group>
-                <field name="supporters_ids" widget="many2many_tags" />
-              </group>
+              <div class="oe_title">
+                <field name="image" widget="image" class="oe_avatar" />
+              </div>
               <group>
                 <field name="grievance_type_id" />
                 <field name="department_id" />
+                <field name="assignees_id" />
               </group>
             </group>
+            <notebook>
+              <page string="Supports By">
+                <group>
+                    <field name="supporters_ids" widget="many2many_tags"/>
+                </group>
+              </page>
+              <page string="Description">
+                <group>
+                  <field name="description" />
+                </group>
+              </page>
+            </notebook>
           </sheet>
         </form>
       </field>

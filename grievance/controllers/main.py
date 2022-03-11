@@ -1,3 +1,4 @@
+import base64
 from odoo import http
 from odoo.http import request
 
@@ -9,25 +10,46 @@ class grievanceWebsite(http.Controller):
         res_partner = request.env["res.partner"].search([('id','=',id)])
         grievance_type = request.env["grievance.type"].search([])
         grievance_department = request.env["department.register"].search([])
+        grievances = request.env["grievance.register"].search([])
         return request.render("grievance.create_grievance_form_template",{
             "grievances_supporter" : res_partner,
             "grievance_type" : grievance_type,
-            "grievance_department" : grievance_department
+            "grievance_department" : grievance_department,
+            "grievances" : grievances
         })
 
 
 
     @http.route('/create/grievance-registered', website=True, auth="user",type="http", methods=['POST'])
     def grivance_form_register(self, **kw):
-        res_partner = request.env["res.partner"].search([('name','=',kw['Supporter'])])
-        grievance_type = request.env["grievance.type"].search([('name','=',kw['GrivanceType'])])
-        grievance_department = request.env["department.register"].search([('name','=',kw['Department'])])
+        id = request.env.user.partner_id.id
+        res_partner = request.env["res.partner"].search([('id','=',id)])
+        image = kw.get('image',False)
         request.env["grievance.register"].create({
-            'name' : kw['Subject'],
-            'description' : kw['Description'],
+            'name' : kw['name'],
+            'image' : base64.encodestring(image.read()) if image else False,
+            'description' : kw['description'],
             'supporters_ids' : res_partner,
-            'grievance_type_id' : grievance_type.id,
-            'department_id' : grievance_department.id
+            'grievance_type_id' : kw['grievance_type_id'],
+            'department_id' : kw["department_id"]
         })
         
+        return request.render("grievance.successfully_register",{})
+
+
+    @http.route(['/supporters_list/<model("grievance.register"):grievances>', '/supporters_list/<string:is_static>'], auth="user", website=True, type="http")
+    def supporters_details(self, grievances=False, **kw):
+        id = request.env.user.partner_id.id
+        res_partner = request.env["res.partner"].search([('id','=',id)])
+        if grievances:
+            return request.render('grievance.supporters_details', {
+                'grievance': grievances,
+                'supporters' : res_partner
+            })
+
+  
+    @http.route('/add_supporter/', auth="user", website=True, type="http")
+    def supporters_add(self, **kw):
+        id = request.env.user.partner_id.id
+        res_partner = request.env["res.partner"].search([('id','=',id)])
         return request.render("grievance.successfully_register",{})
