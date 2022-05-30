@@ -8,7 +8,7 @@ class grievanceWebsite(http.Controller):
         id = request.env.user.partner_id.id
         res_partner = request.env["res.partner"].search([('id','=',id)])
         grievance_type = request.env["grievance.type"].search([])
-        grievance_department = request.env["res.company"].search([])
+        grievance_department = request.env["hr.department"].search([])
         grievances = request.env["grievance.register"].search([])
         return request.render("grievance.create_grievance_form_template",{
             "grievances_supporter" : res_partner,

@@ -19,7 +19,7 @@ class grievance_Register(models.Model):
     description = fields.Text(required=True)
     supporters_ids = fields.Many2many('res.partner', required=True)
     grievance_type_id = fields.Many2one('grievance.type', required=True)
-    department_id = fields.Many2one('res.company')
+    department_id = fields.Many2one('hr.department')
     stage_id = fields.Many2one('grievance.stage', group_expand='_read_group_stage_ids', default=_default_stage)
     reached_stage = fields.Boolean(default=False)
     status = fields.Selection([('toapproved','To Approve'), ('approved','Approved'),('rejected','Rejected')], required=True, default='toapproved')

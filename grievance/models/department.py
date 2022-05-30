@@ -1,7 +1,7 @@
 from odoo import models, fields,api
 
 class department_Register(models.Model):
-    _inherit = 'res.company'
+    _inherit = 'hr.department'
     _description = 'department registration'
 
 

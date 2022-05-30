@@ -16,9 +16,11 @@
     'application': True,
     'depends':[
         'website',
-        'contacts'
+        'contacts',
+        'hr'
     ],
     'data': [
+        'security/grievance_security.xml',
         'security/ir.model.access.csv',
         'views/Grievance_menu.xml',
         'views/Grievance_views.xml',

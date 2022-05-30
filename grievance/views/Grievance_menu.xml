@@ -21,7 +21,7 @@
 
     <record id="grivance_department_action" model="ir.actions.act_window">
         <field name="name">Department Register</field>
-        <field name="res_model">res.company</field>
+        <field name="res_model">hr.department</field>
         <field name="view_mode">tree,form,kanban,graph,pivot</field>
         
     </record>

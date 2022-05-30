@@ -49,11 +49,11 @@
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" t-att-value="name" class="form-control" name="name" id="subject" placeholder="Subject"/>
+                                <input type="text" t-att-value="name" class="form-control" name="name" id="subject" placeholder="Subject" required="1"/>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" t-att-value="description" name="description" id="description" placeholder="Description" />
+                                <textarea class="form-control" t-att-value="description" name="description" id="description" placeholder="Description" required="1"/>
                             </div>
                             <div class="form-group">
                                 <label for="Supporter_id">Supporter</label>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Upload Image</label>
-                                <input class="form-control" type="file" name="image" id="formFile" accept="image/png, image/jpg, image/jpeg" required="1"/>
+                                <input class="form-control" type="file" name="image" id="formFile" accept="image/png, image/jpg, image/jpeg"/>
                             </div>
                             <button type="submit" class="btn btn-primary mb-5">Create Grievance</button>
                         </form>

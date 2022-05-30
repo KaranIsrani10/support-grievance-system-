@@ -1,4 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_grievance_register,access_grievance_register,grievance.model_grievance_register,base.group_user,1,1,1,1
-access_grievance_type,access_grievance_type,grievance.model_grievance_type,base.group_user,1,1,1,1
-access_grievance_stage,access_grievance_stage,grievance.model_grievance_stage,base.group_user,1,1,1,1
+access_grievance_register_user,access_grievance_register,grievance.model_grievance_register,grievance.group_user_grievance,1,1,1,0
+access_grievance_register_admin,access_grievance_register,grievance.model_grievance_register,grievance.group_manger_grievance,1,1,1,1
+
+access_grievance_type_user,access_grievance_type,grievance.model_grievance_type,grievance.group_user_grievance,1,1,1,0
+access_grievance_type_admin,access_grievance_type,grievance.model_grievance_type,grievance.group_manger_grievance,1,1,1,1
+
+access_grievance_stage_user,access_grievance_stage,grievance.model_grievance_stage,grievance.group_user_grievance,1,1,1,0
+access_grievance_stage_admin,access_grievance_stage,grievance.model_grievance_stage,grievance.group_manger_grievance,1,1,1,1
+
+access_hr_department_user,hr.department.employee,model_hr_department,grievance.group_user_grievance,1,1,1,0
+access_hr_department_admin,hr.department.employee,model_hr_department,grievance.group_manger_grievance,1,1,1,1

@@ -9,19 +9,19 @@
     </record>
 
     <!--department demo data-->
-    <record id="department_1" model="res.company">
+    <record id="department_1" model="hr.department">
         <field name="name">Department of computer science</field>
     </record>
-    <record id="department_2" model="res.company">
+    <record id="department_2" model="hr.department">
         <field name="name">Department of Hindi</field>
     </record>
-    <record id="department_3" model="res.company">
+    <record id="department_3" model="hr.department">
         <field name="name">Department of Estate</field>
     </record>
-    <record id="department_4" model="res.company">
+    <record id="department_4" model="hr.department">
         <field name="name">Department of Education</field>
     </record>
-    <record id="department_5" model="res.company">
+    <record id="department_5" model="hr.department">
         <field name="name">Hostel</field>
     </record>
 
