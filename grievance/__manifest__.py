@@ -15,7 +15,8 @@
     """,
     'application': True,
     'depends':[
-        'website'
+        'website',
+        'contacts'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -23,6 +24,7 @@
         'views/Grievance_views.xml',
         'views/web_template.xml',
         'data/grievance_web_menu.xml',
+        'data/grievance_demo.xml',
         
     ]
     

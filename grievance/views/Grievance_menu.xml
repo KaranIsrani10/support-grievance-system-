@@ -4,20 +4,25 @@
     <record id="grivance_register_action" model="ir.actions.act_window">
         <field name="name">Grievance Register</field>
         <field name="res_model">grievance.register</field>
+        <field name="view_mode">tree,form,kanban,graph,pivot</field>
+    </record>
+
+    <record id="grievance_stage_action" model="ir.actions.act_window">
+        <field name="name">Grievance stages</field>
+        <field name="res_model">grievance.stage</field>
         <field name="view_mode">tree,form</field>
-        
     </record>
 
     <record id="grievance_type_action" model="ir.actions.act_window">
         <field name="name">Grievance Type</field>
         <field name="res_model">grievance.type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
     </record>
 
     <record id="grivance_department_action" model="ir.actions.act_window">
         <field name="name">Department Register</field>
-        <field name="res_model">department.register</field>
-        <field name="view_mode">tree,form</field>
+        <field name="res_model">res.company</field>
+        <field name="view_mode">tree,form,kanban,graph,pivot</field>
         
     </record>
     
@@ -26,6 +31,7 @@
      <menuitem id="menu_grievances_register" name="Grievances">
          <menuitem id="menu_grievance_register_action" action="grivance_register_action"/>
          <menuitem id="menu_grievance_type_action" action="grievance_type_action"/>
+         <menuitem id="menu_grievance_stage_action" action="grievance_stage_action"/>
      </menuitem>
      
      <menuitem id="menu_grievance_department" name="Department">

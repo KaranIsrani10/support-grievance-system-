@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Grievance type demo data-->
+    <record id="grievance_type_1" model="grievance.type">
+        <field name="name">Academic</field>
+    </record>
+    <record id="grievance_type_2" model="grievance.type">
+        <field name="name">Non-Academic</field>
+    </record>
+
+    <!--department demo data-->
+    <record id="department_1" model="res.company">
+        <field name="name">Department of computer science</field>
+    </record>
+    <record id="department_2" model="res.company">
+        <field name="name">Department of Hindi</field>
+    </record>
+    <record id="department_3" model="res.company">
+        <field name="name">Department of Estate</field>
+    </record>
+    <record id="department_4" model="res.company">
+        <field name="name">Department of Education</field>
+    </record>
+    <record id="department_5" model="res.company">
+        <field name="name">Hostel</field>
+    </record>
+
+    <!--grievance stage demo data-->
+    <record id="stage_1" model="grievance.stage">
+        <field name="name">New</field>
+    </record>
+    <record id="stage_2" model="grievance.stage">
+        <field name="name">Inprogress</field>
+    </record>
+    <record id="stage_3" model="grievance.stage">
+        <field name="name">Solved</field>
+    </record>
+
+    <record id="res_partner_grievance_1" model="res.partner">
+        <field name="name">kais</field>
+    </record>
+
+    <!--grievance register demo data-->
+    <record id="grivance_register_1" model="grievance.register">
+        <field name="name">Hostel Food</field>
+        <field name="description">Change the menu on sunday</field>
+        <field name="supporters_ids" eval="[(4, ref('res_partner_grievance_1'))]"/>
+        <field name="grievance_type_id" ref="grievance.grievance_type_2"/>
+        <field name="department_id" ref="grievance.department_5"/>
+        <field name="stage_id" ref="grievance.stage_1"/>
+    </record>
+    <record id="grivance_register_2" model="grievance.register">
+        <field name="name">professor not taking lectures</field>
+        <field name="description"> prof. AK Joshi  not coming regulary at him session time</field>
+        <field name="supporters_ids" eval="[(4, ref('base.res_partner_2'))]"/>
+        <field name="grievance_type_id" ref="grievance.grievance_type_1"/>
+        <field name="department_id" ref="grievance.department_1"/>
+        <field name="stage_id" ref="grievance.stage_2"/>
+    </record>
+</odoo>

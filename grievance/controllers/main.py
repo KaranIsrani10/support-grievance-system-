@@ -2,14 +2,13 @@ import base64
 from odoo import http
 from odoo.http import request
 
-
 class grievanceWebsite(http.Controller):
     @http.route('/grievance', website=True, auth='user', type="http")
     def grievance_form(self, **kw):
         id = request.env.user.partner_id.id
         res_partner = request.env["res.partner"].search([('id','=',id)])
         grievance_type = request.env["grievance.type"].search([])
-        grievance_department = request.env["department.register"].search([])
+        grievance_department = request.env["res.company"].search([])
         grievances = request.env["grievance.register"].search([])
         return request.render("grievance.create_grievance_form_template",{
             "grievances_supporter" : res_partner,
@@ -17,8 +16,6 @@ class grievanceWebsite(http.Controller):
             "grievance_department" : grievance_department,
             "grievances" : grievances
         })
-
-
 
     @http.route('/create/grievance-registered', website=True, auth="user",type="http", methods=['POST'])
     def grivance_form_register(self, **kw):
@@ -36,7 +33,6 @@ class grievanceWebsite(http.Controller):
         
         return request.render("grievance.successfully_register",{})
 
-
     @http.route(['/supporters_list/<model("grievance.register"):grievances>', '/supporters_list/<string:is_static>'], auth="user", website=True, type="http")
     def supporters_details(self, grievances=False, **kw):
         id = request.env.user.partner_id.id
@@ -47,9 +43,11 @@ class grievanceWebsite(http.Controller):
                 'supporters' : res_partner
             })
 
-  
-    @http.route('/add_supporter/', auth="user", website=True, type="http")
-    def supporters_add(self, **kw):
-        id = request.env.user.partner_id.id
-        res_partner = request.env["res.partner"].search([('id','=',id)])
+    @http.route('/add_supporter/<int:id>', auth="user", website=True, type="http")
+    def supporters_add(self, id, **kw):
+        print("\n\n\n",id)
+        user_id = request.env.user.partner_id.id
+        request.env["grievance.register"].search([('id', '=', id)]).write({
+            'supporters_ids': [(4, user_id, 0)],
+            })
         return request.render("grievance.successfully_register",{})

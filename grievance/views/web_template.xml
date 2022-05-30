@@ -3,17 +3,17 @@
     
     <template id="create_grievance_form_template" name="Grievance Create">
         <t t-call="website.layout">
-            <!-- <div class="container"> -->
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-9">
-                        <h3 class="text-center">Open Grievances</h3>
+                        <h3 class="text-center mt-4">Open Grievances</h3>
                         <table class="table table-hover mt-5">
                             <thead>
                                 <th>No.</th>
                                 <th>Subject</th>
                                 <th>Type</th>
                                 <th>Description</th>
-                                <th>State</th>
+                                <th>Status</th>
                                 <th>Department</th>
                                 <!-- <th>Supporters</th> -->
                             </thead>
@@ -34,7 +34,7 @@
                                             <td>
                                                 <t t-out="Grievance.description" />
                                             </td>
-                                            <td><span t-field="Grievance.state"/></td>
+                                            <td><span t-field="Grievance.status"/></td>
                                             <td>
                                                 <t t-out="Grievance.department_id.name" />
                                             </td>
@@ -42,7 +42,6 @@
                                 </t>
                             </tbody>
                         </table>
-                        
                     </div>
                     <div class="col-md-3 bg-light">
                         <h3 class="text-center mt-4">Create Grievances</h3>
@@ -88,7 +87,7 @@
                         </form>
                     </div>
                 </div>
-            <!-- </div> -->
+            </div>
         </t>
     </template>
    
@@ -126,7 +125,7 @@
                                 <th>Subject</th>
                                 <th>Image</th>
                                 <th>Supporters</th>
-                                <th><a class="btn btn-primary" t-attf-href="/add_supporter/#{Grievance.id}">Support This</a></th>
+                                <th></th>
                             </thead>
                             <tbody>
                                 
@@ -138,10 +137,13 @@
                                             <div t-attf-style="padding-top: 50%; background-image: url(/web/image/grievance.register/#{Grievance.id}/image); background-size: cover; background-position:center"/>
                                         </td>
                                         <td>
-                                            <span t-field="grievance.supporters_ids.name"/>
+                                            <t t-foreach="Grievance.supporters_ids" t-as="supporters">
+                                                <br/>
+                                                <t t-out="supporters.name"/>
+                                            </t>
                                         </td>
                                         <td>
-                                            
+                                            <a class="btn btn-primary" t-attf-href="/add_supporter/{{ Grievance.id }}">Support</a>
                                         </td>
                                         
                                     </tr> 
